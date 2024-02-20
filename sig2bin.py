@@ -1,5 +1,5 @@
 import time
-import OnOfftoDotDash
+from OnOfftoDotDash import OnOfftoDotDash
 from typing import Any
 
 
@@ -7,7 +7,7 @@ from typing import Any
 class databank:
     state = False
     time = 0
-    dotDash = OnOfftoDotDash()
+    dotDash = OnOfftoDotDash(14)
     threshold = 90 # Placeholder angle for activation
 
 
