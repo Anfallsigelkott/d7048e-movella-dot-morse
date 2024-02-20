@@ -80,7 +80,11 @@ class Xsens_data_receiver:
 
 
     def on_press(self, key) -> None:
-        if key == keyboard.Key.esc or key.char == 'q':
+        try:
+            k = key.char
+        except:
+            k = key.name
+        if key == keyboard.Key.esc or k == 'q':
             self.run = False
 
 
