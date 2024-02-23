@@ -28,6 +28,10 @@ class OnOfftoDotDash():
 
     def wpmToms(self):
         return (1200 / self.wpm)
+    
+    def reset_string(self):
+        self.dotDashtoText.reset_string()
+
 
 if __name__ == '__main__':
     onOff = OnOfftoDotDash(14)    

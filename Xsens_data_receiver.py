@@ -1,6 +1,7 @@
 import xdpchandler
 import movelladot_pc_sdk
-from sig2bin import databank
+from sig2bin import Databank
+import sys
 
 from pynput import keyboard
 
@@ -11,6 +12,8 @@ class Xsens_data_receiver:
         # TODO: make variables private
         self.xdpcHandler = xdpchandler.XdpcHandler()
         self.device = None
+        self.db = None
+
         # initialize
         if not self.xdpcHandler.initialize():
             print("No Movella DOT device(s) found. Aborting.")
@@ -36,7 +39,8 @@ class Xsens_data_receiver:
             if not self.device.setOnboardFilterProfile("Dynamic"):
                 print("Setting filter profile failed!")
             
-    def run(self, db:databank, log_file:bool=True):
+    def run(self, db:Databank, log_file:bool=True):
+        self.db = db
         if log_file:
             self.device.setLogOptions(movelladot_pc_sdk.XsLogOptions_Euler)
             logFileName = "logfile_" + self.device.bluetoothAddress().replace(':', '-') + ".csv"
@@ -53,6 +57,7 @@ class Xsens_data_receiver:
         listener = keyboard.Listener(on_press=self.on_press)
         listener.start()
 
+        print("\nRunning (q=quit) (r=clear)")
         while self.run:
             if self.xdpcHandler.packetsAvailable():
                 # Retrieve a packet
@@ -86,6 +91,8 @@ class Xsens_data_receiver:
             k = key.name
         if key == keyboard.Key.esc or k == 'q':
             self.run = False
+        if k == 'r':
+            self.db.reset_string()
 
 
     def __del__(self):
@@ -94,8 +101,13 @@ class Xsens_data_receiver:
 
 
 if __name__ == '__main__':
+    args = sys.argv
+    if len(args) >= 2:
+        db = Databank(int(args[1]))
+    else:
+        db = Databank()
+
     obj = Xsens_data_receiver()
-    db = databank()
 
     obj.reset_orientation()
     obj.run(db)

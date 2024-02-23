@@ -4,14 +4,15 @@ from typing import Any
 
 
 
-class databank:
+class Databank:
     state = False
     spacedL = True
     spacedW = True
     time = 0
     dotDash = OnOfftoDotDash(14)
-    threshold = 30 # Placeholder angle for activation
 
+    def __init__(self, threshold = 30):
+        self.threshold = threshold
 
     def setState(self, newState):
         self.state = newState
@@ -20,7 +21,8 @@ class databank:
         self.time = time()
 
     def sigToBin(self, deg):
-        if deg > self.threshold: # active state read
+        #print(f"\r{deg}", end="")
+        if abs(deg) > self.threshold: # active state read
             if not self.state: # going into active
                 self.setState(True) # set state to active
                 self.setTime() # refresh timestam
@@ -31,6 +33,7 @@ class databank:
                 timediff = (time() - self.time)*1000 # time we spent in active state (in ms)
                 self.setState(False) # set state to passive
                 self.setTime() # refresh timestamp
+                self.spacedL, self.spacedW = False, False
                 self.dotDash.recieveState(True, timediff)
             # checking if we should add a space
             else:
@@ -41,4 +44,7 @@ class databank:
                 if timediff > self.dotDash.wpmToms() * 6.5 and not self.spacedW:
                     self.spacedW = True
                     self.dotDash.recieveState(False, timediff)
+
+    def reset_string(self):
+        self.dotDash.reset_string()
 
