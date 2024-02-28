@@ -28,45 +28,50 @@ class OnOfftoDotDash():
 
     def wpmToms(self):
         return (1200 / self.wpm)
-
-onOff = OnOfftoDotDash(14)    
-
-onOff.recieveState(True, 300)
-onOff.recieveState(False, 300)
-
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 300)
-
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 600)
+    
+    def reset_string(self):
+        self.dotDashtoText.reset_string()
 
 
+if __name__ == '__main__':
+    onOff = OnOfftoDotDash(14)    
 
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 300)
-onOff.recieveState(False, 600)
+    onOff.recieveState(True, 300)
+    onOff.recieveState(False, 300)
 
-onOff.recieveState(True, 300)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 600)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 300)
 
-onOff.recieveState(True, 300)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 300)
-onOff.recieveState(False, 100)
-onOff.recieveState(True, 100)
-onOff.recieveState(False, 600)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 600)
+
+
+
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 300)
+    onOff.recieveState(False, 600)
+
+    onOff.recieveState(True, 300)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 600)
+
+    onOff.recieveState(True, 300)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 300)
+    onOff.recieveState(False, 100)
+    onOff.recieveState(True, 100)
+    onOff.recieveState(False, 600)

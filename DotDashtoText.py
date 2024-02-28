@@ -1,4 +1,5 @@
 from enum import Enum
+import sys
 
 class Cha(Enum):
     DIT = 1
@@ -27,7 +28,7 @@ class DotDashtoText():
         "---":    "O",
         ".--.":   "P",
         "--.-":   "Q",
-        "-.-":    "R",
+        ".-.":    "R",
         "...":    "S",
         "-":      "T",
         "..-":    "U",
@@ -62,12 +63,15 @@ class DotDashtoText():
         pass
 
     def recieveSequence(self, dotDashSequence: list):
-        print(dotDashSequence)
+        #print(dotDashSequence)
 
         endOfWord = False
-        if dotDashSequence[len(dotDashSequence)-1] == Cha.SPACE:
+        if dotDashSequence[-1] == Cha.SPACE:
             endOfWord = True
         dotDashSequence.pop()
+        if len(dotDashSequence) < 1:
+            self.outputText = self.outputText + " "
+            return
 
         dotDashString = ""
         for cha in dotDashSequence:
@@ -76,11 +80,18 @@ class DotDashtoText():
             else:
                 dotDashString = dotDashString + "-"
 
-        self.outputText = self.outputText + self.morseTable.get(dotDashString, "*:(*")
+        self.outputText = self.outputText + self.morseTable.get(dotDashString, "")
         if endOfWord:
             self.outputText = self.outputText + " "
 
-        print(self.outputText)
+        print(f'\r{self.outputText}', end='', flush=True)
+
+    def reset_string(self):
+        self.outputText = ""
+        #sys.stdout.write("\033[K")
+        sys.stdout.write('\033[2K\033[1G')
+        sys.stdout.flush()
+        #print('\r' + ' '*100, end='', flush=True)
 
 
 
